@@ -1,4 +1,0 @@
-CompileFlags:
-  Remove:
-    - -target
-    - aarch64-linux-musl
