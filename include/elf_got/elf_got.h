@@ -10,17 +10,17 @@
  */
 
 // Core types
-#include "../../src/core/types.h"
+#include "core/types.h"
 
 // ELF file parsing
-#include "../../src/core/elf_parser.h"
+#include "core/elf_parser.h"
 
 // Process memory reading
-#include "../../src/process/process_reader.h"
-#include "../../src/process/maps_parser.h"
+#include "process/process_reader.h"
+#include "process/maps_parser.h"
 
 // Symbol resolution
-#include "../../src/symbol/symbol_resolver.h"
+#include "symbol/symbol_resolver.h"
 
 /**
  * @namespace elf::got

@@ -27,7 +27,22 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # Compiler Flags (Linux/Unix only)
 # ============================================================================
 add_compile_options(
-    -Wall -Wextra -Wpedantic
+    -Wall
+    -Wextra
+    -Wpedantic
+    -Wcast-align
+    -Wdeprecated
+    -Wdouble-promotion
+    -Wformat=2
+    -Wimplicit-fallthrough
+    -Wnon-virtual-dtor
+    -Wnull-dereference
+    -Wold-style-cast
+    -Woverloaded-virtual
+    -Wshadow
+    -Wsign-conversion
+    -Wunused
+    -Wno-unused-parameter  # Allow unused parameters (common in interfaces)
 )
 
 if(ENABLE_WERROR)
@@ -71,6 +86,7 @@ target_include_directories(elf_got_core PUBLIC
 )
 
 target_include_directories(elf_got_core PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${elfio_SOURCE_DIR}
 )
 
@@ -84,10 +100,12 @@ target_link_libraries(elf_got_core PUBLIC
 # ============================================================================
 if(BUILD_EXAMPLES)
     add_executable(elf_got src/main.cpp)
+    target_include_directories(elf_got PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
     target_link_libraries(elf_got PRIVATE elf_got_core)
 
     # Legacy example (backward compatibility)
     add_executable(example example.cpp)
+    target_include_directories(example PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
     target_link_libraries(example PRIVATE elf_got_core)
 
     # Examples directory

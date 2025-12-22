@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../core/types.h"
+#include "core/types.h"
 #include <optional>
 #include <string>
+#include <string_view>
 #include <cstdint>
 
 namespace elf::got {
@@ -58,7 +59,7 @@ public:
      */
     [[nodiscard]] static std::optional<SymbolInfo> find_symbol(
         const std::string& elf_path,
-        const std::string& symbol_name) noexcept;
+        std::string_view symbol_name) noexcept;
 
     /**
      * @brief Find all symbols matching a pattern
@@ -68,7 +69,7 @@ public:
      */
     [[nodiscard]] static std::vector<SymbolInfo> find_symbols_matching(
         const std::string& elf_path,
-        const std::string& pattern) noexcept;
+        std::string_view pattern) noexcept;
 
     /**
      * @brief Demangle C++ symbol name

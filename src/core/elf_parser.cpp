@@ -353,7 +353,7 @@ std::string ELFParser::get_build_id(const std::string& elf_path) noexcept {
     }
 
     // Build ID data starts after header (12 bytes) + name (4 bytes, aligned)
-    const std::size_t offset = 12 + ((namesz + 3) & ~3);
+    const std::size_t offset = 12 + ((namesz + 3) & ~std::size_t{3});
     if (offset + descsz > section_size) {
         return "";
     }

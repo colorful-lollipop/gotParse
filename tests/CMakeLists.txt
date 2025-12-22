@@ -17,6 +17,8 @@ add_executable(elf_got_tests
     test_symbol_resolver.cpp
 )
 
+target_include_directories(elf_got_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src)
+
 target_link_libraries(elf_got_tests PRIVATE
     elf_got_core
     gtest_main

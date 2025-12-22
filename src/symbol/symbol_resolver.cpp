@@ -1,6 +1,6 @@
 #include "symbol_resolver.h"
-#include "../core/elf_parser.h"
-#include "../process/maps_parser.h"
+#include "core/elf_parser.h"
+#include "process/maps_parser.h"
 
 #include <elfio/elfio.hpp>
 #include <elfio/elf_types.hpp>
@@ -8,8 +8,8 @@
 #include <dlfcn.h>
 #include <cxxabi.h>
 #include <cstring>
-#include <algorithm>
 #include <string>
+#include <string_view>
 
 namespace elf::got {
 
@@ -256,7 +256,7 @@ SymbolResolver::ResolveResult SymbolResolver::resolve_from_elf(
 
 std::optional<SymbolInfo> SymbolResolver::find_symbol(
     const std::string& elf_path,
-    const std::string& symbol_name) noexcept {
+    std::string_view symbol_name) noexcept {
     ELFIO::elfio reader;
     if (!reader.load(elf_path)) {
         return std::nullopt;
@@ -324,7 +324,7 @@ std::optional<SymbolInfo> SymbolResolver::find_symbol(
 
 std::vector<SymbolInfo> SymbolResolver::find_symbols_matching(
     const std::string& elf_path,
-    const std::string& pattern) noexcept {
+    std::string_view pattern) noexcept {
     std::vector<SymbolInfo> results;
 
     ELFIO::elfio reader;

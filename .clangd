@@ -1,0 +1,80 @@
+CompileFlags:
+  Add:
+    - "-Wall"
+    - "-Wextra"
+    - "-Wpedantic"
+    - "-Wcast-align"
+    - "-Wdeprecated"
+    - "-Wdouble-promotion"
+    - "-Wformat=2"
+    - "-Wimplicit-fallthrough"
+    - "-Wnon-virtual-dtor"
+    - "-Wnull-dereference"
+    - "-Wold-style-cast"
+    - "-Woverloaded-virtual"
+    - "-Wshadow"
+    - "-Wsign-conversion"
+    - "-Wunused"
+    - "-Wno-unused-parameter"
+  Compiler: clang++
+
+Diagnostics:
+  UnusedIncludes: Strict
+  MissingIncludes: Strict
+  ClangTidy:
+    Add:
+      # Modernize C++ code
+      - modernize-use-nullptr
+      - modernize-use-override
+      - modernize-use-using
+      - modernize-avoid-bind
+      - modernize-make-shared
+      - modernize-make-unique
+      - modernize-return-braced-init-list
+      - modernize-replace-random-shuffle
+      - modernize-use-bool-literals
+      - modernize-use-equals-default
+      - modernize-use-equals-delete
+      - modernize-loop-convert
+      - modernize-pass-by-value
+      - modernize-raw-string-literal
+      - modernize-string-concatenation
+      - modernize-use-auto
+      - modernize-use-noexcept
+      - modernize-use-transparent-functors
+      # Performance improvements
+      - performance-*
+      # Bug-prone code patterns
+      - bugprone-*
+      # Readability improvements
+      - readability-redundant-*
+      - readability-identifier-length
+      - readability-const-return-type
+      - readability-container-size-empty
+      - readability-delete-null-pointer
+      - readability-avoid-const-params-in-decls
+      # C++ Core Guidelines
+      - cppcoreguidelines-*
+    Remove:
+      - -modernize-use-trailing-return-type
+      - -readability-magic-numbers
+      - -readability-function-cognitive-complexity
+      - -readability-identifier-length
+      - -cppcoreguidelines-pro-bounds-pointer-arithmetic
+      - -cppcoreguidelines-avoid-magic-numbers
+      - -cppcoreguidelines-avoid-c-arrays
+      - -cppcoreguidelines-owning-memory
+      - -bugprone-easily-swappable-parameters
+      - -modernize-avoid-c-arrays
+      - -readability-simplify-boolean-expr
+
+Completion:
+  AllScopes: true
+
+Index:
+  Background: Build
+
+InlayHints:
+  Enabled: Yes
+  ParameterNames: Yes
+  DeducedTypes: Yes

@@ -4,6 +4,9 @@
 
 # Helper function - 用于确定可执行文件应该放在哪里
 function(setup_example_target target_name)
+    # Add src directory to include path
+    target_include_directories(${target_name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src)
+
     # 链接核心库
     target_link_libraries(${target_name} PRIVATE elf_got_core)
 

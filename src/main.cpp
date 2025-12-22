@@ -29,7 +29,7 @@ void print_usage(const char* program_name) {
 /**
  * @brief Print a separator line
  */
-void print_separator(char c = '-', int len = 80) {
+void print_separator(char c = '-', std::size_t len = 80) {
     std::cout << std::string(len, c) << "\n";
 }
 

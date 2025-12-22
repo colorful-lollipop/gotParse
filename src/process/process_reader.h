@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../core/types.h"
-#include "maps_parser.h"
+#include "core/types.h"
+#include "process/maps_parser.h"
 #include <optional>
 #include <vector>
 #include <cstdint>
