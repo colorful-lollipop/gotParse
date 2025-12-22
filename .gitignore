@@ -1,0 +1,54 @@
+# Build directories
+build/
+cmake-build-*/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Output
+bin/
+lib/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Coverage
+coverage.info
+coverage_html/
+*.gcda
+*.gcno
+*.gcov
+
+# Dependencies
+_deps/
+
+# macOS
+.DS_Store
+
+# Debug
+*.dSYM/
+*.su
+
+# Cache
+.cache/
+
+# IDE config
+.clangd/
+.claude/
+*.json
+!cmake/*.json
+
