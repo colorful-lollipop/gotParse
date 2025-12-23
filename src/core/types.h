@@ -23,6 +23,12 @@ struct GOTEntry {
     std::optional<std::uintptr_t> runtime_value;///< Actual value in memory
     bool address_matches{false};                ///< Does calculated VA match actual?
 
+    // Extended verification results
+    std::string runtime_symbol_name;            ///< Symbol name at runtime address
+    bool symbol_name_matches{false};            ///< Does symbol name match?
+    std::optional<std::uintptr_t> expected_address;///< Calculated expected address
+    bool address_is_hooked{false};              ///< Is address potentially hooked?
+
     [[nodiscard]] bool is_valid() const noexcept {
         return has_symbol;
     }

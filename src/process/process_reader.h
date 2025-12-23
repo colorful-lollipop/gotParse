@@ -2,6 +2,7 @@
 
 #include "core/types.h"
 #include "process/maps_parser.h"
+#include "symbol/got_verifier.h"
 #include <optional>
 #include <vector>
 #include <cstdint>
@@ -156,6 +157,46 @@ public:
      * @brief Get error string for error code
      */
     [[nodiscard]] static const char* error_to_string(ReadError error) noexcept;
+
+    /**
+     * @brief Verify a GOT entry using symbol name comparison
+     * @param entry GOT entry to verify (must have runtime_value populated)
+     * @param context Verification context
+     * @return Verification result
+     */
+    [[nodiscard]] GOTVerifier::VerificationResult verify_got_entry_symbol(
+        const GOTEntry& entry,
+        const GOTVerifier::VerificationContext& context) const noexcept;
+
+    /**
+     * @brief Verify a GOT entry using LD simulation
+     * @param entry GOT entry to verify
+     * @param elf_path Path to the ELF file being analyzed
+     * @param context Verification context
+     * @return Verification result
+     */
+    [[nodiscard]] GOTVerifier::VerificationResult verify_got_entry_ld(
+        const GOTEntry& entry,
+        const std::string& elf_path,
+        const GOTVerifier::VerificationContext& context) const noexcept;
+
+    /**
+     * @brief Verify a GOT entry using both methods
+     * @param entry GOT entry to verify (will be updated with results)
+     * @param elf_path Path to the ELF file being analyzed
+     * @param context Verification context
+     * @return Verification result
+     */
+    [[nodiscard]] GOTVerifier::VerificationResult verify_got_entry(
+        GOTEntry& entry,
+        const std::string& elf_path,
+        const GOTVerifier::VerificationContext& context) const noexcept;
+
+    /**
+     * @brief Create verification context from current process state
+     * @return VerificationContext with module info
+     */
+    [[nodiscard]] GOTVerifier::VerificationContext create_verification_context() const noexcept;
 
 private:
     pid_t pid_;

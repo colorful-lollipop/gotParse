@@ -21,6 +21,7 @@
 
 // Symbol resolution
 #include "symbol/symbol_resolver.h"
+#include "symbol/got_verifier.h"
 
 /**
  * @namespace elf::got
@@ -31,4 +32,5 @@
  * - ProcessReader: Read process memory via /proc/pid/mem
  * - MapsParser: Parse /proc/pid/maps memory regions
  * - SymbolResolver: Resolve symbols from addresses
+ * - GOTVerifier: Verify GOT entries for hooking detection
  */

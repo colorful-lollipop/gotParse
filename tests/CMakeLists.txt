@@ -16,6 +16,7 @@ add_executable(elf_got_tests
     test_process_reader.cpp
     test_symbol_resolver.cpp
     test_readelf_verification.cpp
+    test_got_verifier.cpp
 )
 
 target_include_directories(elf_got_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src)

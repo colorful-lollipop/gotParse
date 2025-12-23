@@ -78,6 +78,7 @@ add_library(elf_got_core STATIC
     src/process/maps_parser.cpp
     src/process/process_reader.cpp
     src/symbol/symbol_resolver.cpp
+    src/symbol/got_verifier.cpp
 )
 
 target_include_directories(elf_got_core PUBLIC

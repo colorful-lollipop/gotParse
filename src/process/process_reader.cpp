@@ -280,4 +280,56 @@ const char* ProcessReader::error_to_string(ReadError error) noexcept {
     }
 }
 
+GOTVerifier::VerificationContext ProcessReader::create_verification_context() const noexcept {
+    GOTVerifier::VerificationContext context;
+    context.pid = pid_;
+
+    if (cached_regions_) {
+        context.regions = *cached_regions_;
+    } else {
+        // Lazy load regions
+        auto parse_result = MapsParser::parse(pid_);
+        if (parse_result) {
+            context.regions = parse_result->regions;
+        }
+    }
+
+    // Get module bases
+    auto parse_result = MapsParser::parse(pid_);
+    if (parse_result) {
+        context.module_bases = std::move(parse_result->module_bases);
+    }
+
+    return context;
+}
+
+GOTVerifier::VerificationResult ProcessReader::verify_got_entry_symbol(
+    const GOTEntry& entry,
+    const GOTVerifier::VerificationContext& context) const noexcept {
+    return GOTVerifier::verify_by_symbol_name(entry, context);
+}
+
+GOTVerifier::VerificationResult ProcessReader::verify_got_entry_ld(
+    const GOTEntry& entry,
+    const std::string& elf_path,
+    const GOTVerifier::VerificationContext& context) const noexcept {
+    return GOTVerifier::verify_by_ld_simulation(entry, elf_path, context);
+}
+
+GOTVerifier::VerificationResult ProcessReader::verify_got_entry(
+    GOTEntry& entry,
+    const std::string& elf_path,
+    const GOTVerifier::VerificationContext& context) const noexcept {
+
+    auto result = GOTVerifier::verify_comprehensive(entry, elf_path, context);
+
+    // Update entry with verification results
+    entry.runtime_symbol_name = result.runtime_symbol;
+    entry.symbol_name_matches = result.symbol_name_verified;
+    entry.expected_address = result.expected_address;
+    entry.address_is_hooked = result.is_hooked();
+
+    return result;
+}
+
 } // namespace elf::got

@@ -13,6 +13,15 @@ std::string GOTEntry::to_string() const {
     if (runtime_value) {
         oss << "0x" << *runtime_value;
         oss << ", matches=" << (address_matches ? "yes" : "no");
+        // Extended verification info
+        if (!runtime_symbol_name.empty()) {
+            oss << ", runtime_symbol=" << runtime_symbol_name;
+            oss << ", symbol_matches=" << (symbol_name_matches ? "yes" : "no");
+        }
+        if (expected_address) {
+            oss << ", expected=0x" << *expected_address;
+            oss << ", hooked=" << (address_is_hooked ? "YES" : "no");
+        }
     } else {
         oss << "<unread>";
     }
