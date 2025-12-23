@@ -38,8 +38,8 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/colorful-lollipop/gotPrase.git
-cd gotPrase
+git clone https://github.com/colorful-lollipop/gotParse.git
+cd gotParse
 
 # 配置并构建
 mkdir build && cd build
@@ -143,7 +143,7 @@ if (symbol) {
 ## 项目结构
 
 ```
-gotPrase/
+gotParse/
 ├── include/              # 公共头文件
 │   └── elf_got/
 │       └── elf_got.h    # 主 API 头文件

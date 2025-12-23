@@ -54,7 +54,7 @@ cd build && ./bin/elf_got_tests --gtest_filter="TestSuite.TestCase"
 The project is a C++ library (`elf_got_core`) plus a CLI tool for analyzing ELF Global Offset Table (GOT) sections.
 
 ```
-gotPrase/
+gotParse/
 ├── include/elf_got/          # Public API headers
 │   └── elf_got.h             # Main entry point (includes all components)
 ├── src/
